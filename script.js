@@ -1,3 +1,7 @@
+function openPlatform() {
+  document.getElementById("welcomePage").style.display = "none";
+  document.getElementById("platformPage").style.display = "block";
+}
 function selectLanguage(language) {
   document.getElementById("languageTitle").innerText = language + " Lesson";
 
