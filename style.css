@@ -74,17 +74,33 @@ section {
 }
 
 .cards button {
-  padding: 25px;
+  padding: 22px;
   border: none;
-  border-radius: 15px;
-  background: #1e293b;
+  border-radius: 18px;
+  background: linear-gradient(145deg, #1e293b, #0f172a);
   color: white;
-  font-size: 22px;
-  box-shadow: 0 5px 15px black;
+  box-shadow: 0 8px 18px black;
+  text-align: left;
+  transition: 0.3s;
+}
+
+.cards button span {
+  display: block;
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+.cards button small {
+  display: block;
+  color: #cbd5e1;
+  font-size: 13px;
+  line-height: 1.5;
 }
 
 .cards button:hover {
-  background: #2563eb;
+  background: linear-gradient(145deg, #2563eb, #9333ea);
+  transform: scale(1.03);
 }
 
 .lesson, .practice {
