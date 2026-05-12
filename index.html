@@ -1,41 +1,43 @@
 <!DOCTYPE html>
 <html>
-
 <head>
-  <title>LAVA TECH</title>
+  <title>CodeLearn Practice</title>
   <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
-  <nav>
-    <h1>LAVA TECH 👑</h1>
+<header>
+  <h1>CodeLearn Practice</h1>
+  <p>Learn coding languages from lessons to practical execution</p>
+</header>
 
-    <ul>
-      <li>Home</li>
-      <li>About</li>
-      <li>Services</li>
-      <li>Contact</li>
-    </ul>
-  </nav>
+<section class="languages">
+  <h2>Choose a Language</h2>
 
-  <section class="hero">
+  <div class="cards">
+    <button onclick="selectLanguage('C')">C</button>
+    <button onclick="selectLanguage('C++')">C++</button>
+    <button onclick="selectLanguage('Java')">Java</button>
+    <button onclick="selectLanguage('Python')">Python</button>
+  </div>
+</section>
 
-    <h2>Build Your Future</h2>
+<section class="lesson">
+  <h2 id="languageTitle">Select a language</h2>
+  <p id="lessonText">Your lesson will appear here.</p>
+</section>
 
-    <p>
-      Learn Coding, AI and Technology using only mobile
-    </p>
+<section class="practice">
+  <h2>Practice Code</h2>
 
-    <button onclick="showMessage()">
-      Start Learning
-    </button>
+  <textarea id="codeBox" placeholder="Write your code here..."></textarea>
 
-  </section>
+  <button class="runBtn" onclick="runCode()">Run Code</button>
 
-  <script src="script.js"></script>
+  <h3>Output:</h3>
+  <div id="outputBox">Output will appear here...</div>
+</section>
 
-
+<script src="script.js"></script>
 </body>
-
 </html>
