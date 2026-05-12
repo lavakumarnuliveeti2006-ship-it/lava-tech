@@ -1,56 +1,77 @@
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #0f172a;
+  color: white;
 }
 
-body{
-  background:#020b2d;
-  color:white;
-  font-family:Arial;
+header {
+  text-align: center;
+  padding: 40px 20px;
+  background: linear-gradient(135deg, #2563eb, #9333ea);
 }
 
-nav{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  padding:20px;
-  background:#07133d;
+header h1 {
+  font-size: 32px;
 }
 
-nav h1{
-  color:#2bb3ff;
+section {
+  padding: 25px;
 }
 
-nav ul{
-  display:flex;
-  list-style:none;
+.cards {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px;
+  margin-top: 15px;
 }
 
-nav ul li{
-  margin-left:20px;
+.cards button {
+  padding: 25px;
+  border: none;
+  border-radius: 15px;
+  background: #1e293b;
+  color: white;
+  font-size: 22px;
+  box-shadow: 0 5px 15px black;
 }
 
-.hero{
-  text-align:center;
-  padding:120px 20px;
+.cards button:hover {
+  background: #2563eb;
 }
 
-.hero h2{
-  font-size:70px;
-  margin-bottom:20px;
+.lesson, .practice {
+  background: #111827;
+  margin: 20px;
+  border-radius: 15px;
 }
 
-.hero p{
-  font-size:30px;
-  margin-bottom:40px;
+textarea {
+  width: 100%;
+  height: 180px;
+  background: #020617;
+  color: #22c55e;
+  border: 1px solid #334155;
+  border-radius: 10px;
+  padding: 15px;
+  font-size: 16px;
 }
 
-button{
-  background:#2bb3ff;
-  color:white;
-  border:none;
-  padding:18px 40px;
-  font-size:25px;
-  border-radius:10px;
-} 
+.runBtn {
+  margin-top: 15px;
+  padding: 12px 25px;
+  background: #22c55e;
+  color: black;
+  border: none;
+  border-radius: 10px;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+#outputBox {
+  background: black;
+  color: #22c55e;
+  padding: 15px;
+  border-radius: 10px;
+  min-height: 60px;
+}
