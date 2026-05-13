@@ -13,80 +13,69 @@ function selectLanguage(language) {
     } 
     else if (language === "Java") {
         document.getElementById("lessonText").innerText =
-            "Java is used for apps, backend, and Android development.";
+            "Java is used for apps and backend systems.";
         document.getElementById("codeBox").value =
-            'public class Main {\\n  public static void main(String[] args) {\\n    System.out.println("Hello World");\\n  }\\n}';
+            'System.out.println("Hello Lava");';
     } 
     else if (language === "C") {
         document.getElementById("lessonText").innerText =
             "C is a powerful basic programming language.";
         document.getElementById("codeBox").value =
-            '#include <stdio.h>\\nint main() {\\n  printf("Hello World");\\n  return 0;\\n}';
+            'printf("Hello Lava");';
     } 
     else if (language === "C++") {
         document.getElementById("lessonText").innerText =
-            "C++ is used for games, software, and high-performance apps.";
+            "C++ is used for games and performance apps.";
         document.getElementById("codeBox").value =
-            '#include <iostream>\\nusing namespace std;\\nint main() {\\n  cout << "Hello World";\\n  return 0;\\n}';
+            'cout << "Hello Lava";';
     }
 }
 
-let pyodideReady = false;
-let pyodide = null;
-let pyodideScriptLoaded = false;
-
-function loadPyodideScript() {
-    return new Promise((resolve, reject) => {
-        if (pyodideScriptLoaded) {
-            resolve();
-            return;
-        }
-
-        const script = document.createElement("script");
-        script.src = "https://cdn.jsdelivr.net/pyodide/v0.26.4/full/pyodide.js";
-
-        script.onload = () => {
-            pyodideScriptLoaded = true;
-            resolve();
-        };
-
-        script.onerror = () => {
-            reject("Failed to load Python compiler. Check internet connection.");
-        };
-
-        document.body.appendChild(script);
-    });
-}
-
-async function runCode() {
+function runCode() {
     const code = document.getElementById("codeBox").value;
     const output = document.getElementById("outputBox");
 
-  output.innerHTML = "First time loading Python (30–60 sec)… please wait ⏳";
-
-    try {
-        if (!pyodideReady) {
-            await loadPyodideScript();
-            pyodide = await loadPyodide();
-            pyodideReady = true;
+    // Python print()
+    if (code.includes("print(")) {
+        let match = code.match(/print\\((.*?)\\)/);
+        if (match && match[1]) {
+            output.innerHTML = "Output:<br>" + match[1].replace(/['"]/g, "");
+        } else {
+            output.innerHTML = "Output:<br>Syntax Error";
         }
+    }
 
-        pyodide.runPython(`
-import sys
-from io import StringIO
+    // Java System.out.println()
+    else if (code.includes("System.out.println")) {
+        let match = code.match(/println\\((.*?)\\)/);
+        if (match && match[1]) {
+            output.innerHTML = "Output:<br>" + match[1].replace(/['"]/g, "");
+        } else {
+            output.innerHTML = "Output:<br>Syntax Error";
+        }
+    }
 
-output = StringIO()
-sys.stdout = output
+    // C printf()
+    else if (code.includes("printf")) {
+        let match = code.match(/printf\\((.*?)\\)/);
+        if (match && match[1]) {
+            output.innerHTML = "Output:<br>" + match[1].replace(/['"]/g, "");
+        } else {
+            output.innerHTML = "Output:<br>Syntax Error";
+        }
+    }
 
-${code}
+    // C++ cout
+    else if (code.includes("cout")) {
+        let match = code.match(/<<\\s*"(.*?)"/);
+        if (match && match[1]) {
+            output.innerHTML = "Output:<br>" + match[1];
+        } else {
+            output.innerHTML = "Output:<br>Syntax Error";
+        }
+    }
 
-sys.stdout = sys.__stdout__
-`);
-
-        const result = pyodide.runPython("output.getvalue()");
-        output.innerHTML = "Output:<br>" + result.replace(/\\n/g, "<br>");
-
-    } catch (err) {
-        output.innerHTML = "Error:<br>" + err;
+    else {
+        output.innerHTML = "Output:<br>Code executed (demo mode)";
     }
 }
