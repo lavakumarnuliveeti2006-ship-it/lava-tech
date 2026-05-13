@@ -54,19 +54,43 @@ buttons.forEach(button => {
         }
     });
 });
-function runCode() {
+let pyodideReady = false;
+let pyodide;
+
+async function loadPyodideAndPackages() {
+    pyodide = await loadPyodide();
+    pyodideReady = true;
+}
+
+loadPyodideAndPackages();
+
+async function runCode() {
     let code = document.getElementById("codeBox").value;
     let output = document.getElementById("outputBox");
 
-    if (code.includes("print(")) {
-        let result = code.match(/print\((.*?)\)/);
+    if (!pyodideReady) {
+        output.innerHTML = "Loading Python... please wait ⏳";
+        return;
+    }
 
-        if (result && result[1]) {
-            output.innerHTML = "Output:<br>" + result[1].replace(/['"]/g, "");
-        } else {
-            output.innerHTML = "Output:<br>Syntax Error";
-        }
-    } else {
-        output.innerHTML = "Output:<br>Write Python print() to see result";
+    try {
+        pyodide.runPython(`
+import sys
+from io import StringIO
+
+output = StringIO()
+sys.stdout = output
+
+${code}
+
+sys.stdout = sys.__stdout__
+output.getvalue()
+        `);
+
+        let result = pyodide.runPython("output.getvalue()");
+        output.innerHTML = "Output:<br>" + result;
+
+    } catch (err) {
+        output.innerHTML = "Error:<br>" + err;
     }
 }
