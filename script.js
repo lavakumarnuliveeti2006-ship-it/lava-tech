@@ -33,12 +33,6 @@ function selectLanguage(language) {
   }
 }
 
-function runCode() {
-  let code = document.getElementById("codeBox").value;
-
-  document.getElementById("outputBox").innerText =
-    "Demo Output:\nYour code is ready.\nReal compiler will be added later.";
-}
 const buttons = document.querySelectorAll(".course-btn");
 const lessonBox = document.querySelector("#lesson-content");
 
@@ -61,13 +55,18 @@ buttons.forEach(button => {
     });
 });
 function runCode() {
-    const code = document.getElementById("codeBox").value;
-    const output = document.getElementById("outputBox");
+    let code = document.getElementById("codeBox").value;
+    let output = document.getElementById("outputBox");
 
-    // Simple demo output
-    if (code.includes("Hello World")) {
-        output.innerHTML = "Output:<br>Hello World";
+    if (code.includes("print(")) {
+        let result = code.match(/print\((.*?)\)/);
+
+        if (result && result[1]) {
+            output.innerHTML = "Output:<br>" + result[1].replace(/['"]/g, "");
+        } else {
+            output.innerHTML = "Output:<br>Syntax Error";
+        }
     } else {
-        output.innerHTML = "Output:<br>Code executed (demo mode)";
+        output.innerHTML = "Output:<br>Write Python print() to see result";
     }
 }
