@@ -60,3 +60,14 @@ buttons.forEach(button => {
         }
     });
 });
+function runCode() {
+    const code = document.getElementById("codeBox").value;
+    const output = document.getElementById("outputBox");
+
+    // Simple demo output
+    if (code.includes("Hello World")) {
+        output.innerHTML = "Output:<br>Hello World";
+    } else {
+        output.innerHTML = "Output:<br>Code executed (demo mode)";
+    }
+}
