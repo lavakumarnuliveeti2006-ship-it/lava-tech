@@ -32,18 +32,29 @@ function selectLanguage(language) {
 }
 
 function runCode() {
-    const code = document.getElementById("codeBox").value;
-    const output = document.getElementById("outputBox");
+    let code = document.getElementById("codeBox").value;
+    let output = document.getElementById("outputBox");
 
-    // Python print()
     if (code.includes("print(")) {
-        let match = code.match(/print\\((.*?)\\)/);
-        if (match && match[1]) {
-            output.innerHTML = "Output:<br>" + match[1].replace(/['"]/g, "");
-        } else {
+        try {
+            let result = code.match(/print\((.*)\)/);
+
+            if (result && result[1]) {
+                let text = result[1]
+                    .replace(/['"]/g, "")   // remove quotes
+                    .trim();
+
+                output.innerHTML = "Output:<br>" + text;
+            } else {
+                output.innerHTML = "Output:<br>Syntax Error";
+            }
+        } catch {
             output.innerHTML = "Output:<br>Syntax Error";
         }
+    } else {
+        output.innerHTML = "Output:<br>Use print() to see result";
     }
+}
 
     // Java System.out.println()
     else if (code.includes("System.out.println")) {
