@@ -39,3 +39,24 @@ function runCode() {
   document.getElementById("outputBox").innerText =
     "Demo Output:\nYour code is ready.\nReal compiler will be added later.";
 }
+const buttons = document.querySelectorAll(".course-btn");
+const lessonBox = document.querySelector("#lesson-content");
+
+buttons.forEach(button => {
+    button.addEventListener("click", () => {
+        const language = button.getAttribute("data-lang");
+
+        if (language === "c") {
+            lessonBox.innerHTML = "C Basics: Variables, Data Types, printf()";
+        }
+        else if (language === "cpp") {
+            lessonBox.innerHTML = "C++ Basics: OOP, Classes, Objects";
+        }
+        else if (language === "java") {
+            lessonBox.innerHTML = "Java Basics: JVM, Classes, Methods";
+        }
+        else if (language === "python") {
+            lessonBox.innerHTML = "Python Basics: Easy syntax, print(), loops";
+        }
+    });
+});
