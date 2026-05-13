@@ -57,20 +57,15 @@ buttons.forEach(button => {
 let pyodideReady = false;
 let pyodide;
 
-async function loadPyodideAndPackages() {
-    pyodide = await loadPyodide();
-    pyodideReady = true;
-}
-
-loadPyodideAndPackages();
-
 async function runCode() {
     let code = document.getElementById("codeBox").value;
     let output = document.getElementById("outputBox");
 
     if (!pyodideReady) {
         output.innerHTML = "Loading Python... please wait ⏳";
-        return;
+
+        pyodide = await loadPyodide();
+        pyodideReady = true;
     }
 
     try {
