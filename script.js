@@ -62,7 +62,7 @@ async function runCode() {
     const code = document.getElementById("codeBox").value;
     const output = document.getElementById("outputBox");
 
-    output.innerHTML = "Loading Python... please wait ⏳";
+  output.innerHTML = "First time loading Python (30–60 sec)… please wait ⏳";
 
     try {
         if (!pyodideReady) {
